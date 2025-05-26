@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portal UNAB - Ingeniería de Sistemas</title>
+
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            background-image: url('https://i.postimg.cc/V69gCj4W/Fondo.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: var(--background-light);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .top-header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            color: var(--text-color-light);
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 8px var(--shadow-subtle);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .logo-placeholder {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-right: 25px;
+            font-size: 1.3em;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title {
+            font-size: 1.15em;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        .wireframe-nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .wireframe-nav a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-size: 0.95em;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .wireframe-nav a:hover {
+            color: var(--text-color-light);
+            border-bottom-color: var(--primary-green);
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--dark-green);
+            color: var(--text-color-light);
+            padding: 25px;
+            border-radius: 8px;
+            margin-right: 20px;
+            box-shadow: 0 4px 10px var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-self: flex-start;
+        }
+
+        .user-info h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--primary-green);
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .user-info p {
+            margin: 4px 0;
+            font-size: 0.95em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .quick-access h4 {
+            margin-top: 0;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(132, 216, 0, 0.5);
+            padding-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .quick-access a {
+            display: block;
+            color: var(--text-color-light);
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .quick-access a:last-child {
+            border-bottom: none;
+        }
+
+        .quick-access a:hover {
+            color: var(--primary-green);
+            padding-left: 8px;
+        }
+
+        .content-area {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 0;
+        }
+
+        .news-card {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-date {
+            font-size: 0.85em;
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            color: var(--dark-green);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: auto;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: color 0.3s ease;
+        }
+        .card-link:hover {
+            color: var(--unab-blue);
+            text-decoration: underline;
+        }
+
+        .view-more-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 10px auto;
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 2px 5px var(--shadow-subtle);
+        }
+        .view-more-button:hover {
+            background-color: #6aa800;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+                padding: 20px;
+            }
+            .content-area {
+                padding: 0;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .top-header {
+                padding: 10px 15px;
+            }
+            .wireframe-nav {
+                gap: 10px;
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .logo-placeholder {
+                margin-right: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .top-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header-left {
+                margin-bottom: 10px;
+            }
+            .header-title {
+                font-size: 1em;
+            }
+            .logo-placeholder {
+                font-size: 1.2em;
+            }
+            .wireframe-nav a {
+                font-size: 0.9em;
+                padding: 3px 0;
+            }
+            .sidebar {
+                padding: 15px;
+            }
+            .user-info h3 {
+                font-size: 1.2em;
+            }
+            .quick-access a {
+                font-size: 0.9em;
+                padding: 8px 0;
+            }
+            .content-area {
+                gap: 15px;
+            }
+            .card-title {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <div class="header-left" style="display: flex; align-items: center;">
+            <span class="logo-placeholder"><img src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="" style="height: auto; width: 150px;"></span>
+            <h1 class="header-title" style="margin-left: 10px;">Mi Portal UNAB</h1>
+        </div>
+
+        <div class="header-right">
+            <div class="wireframe-nav">
+                <a href="p_3.html">Calificaciones</a>
+                <a href="jes_3.html">Notificaciones</a>
+                <a href="us.html">Directorio</a>
+                <a href="p_2.html">Calendario</a>
+                <a href="Avance3.2.html">Recursos</a>
+                <div class="notification-icon">
+    <i class="fas fa-bell"></i> <span class="notification-badge"></span>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="user-info">
+                <h3>Jesus David Urbiñez Caselles</h3>
+                <p>Estudiante de Ingeniería de Sistemas</p>
+                <p>Código: [Tu Código]</p>
+            </div>
+            <div class="quick-access">
+                <h4>Accesos Rápidos</h4>
+                <a href="Avance3.3.html">Mi Perfil</a>
+                <a href="Jes_2.html">Contacto con UNAB</a>
+                <a>Ayuda y Soporte</a>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="news-card">
+                <img src="https://i.postimg.cc/gJb4jMy0/cursos-informatica.png" alt="Imagen curso de informática" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 03, May 2025</div>
+                    <h3 class="card-title">Cursos vacacionales de Informática (primer semestre 2025)</h3>
+                    <a href="https://unab.edu.co/cursos-de-informatica-primer-ciclo-primer-semestre-2025/" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                    <img src="https://i.postimg.cc/0j8fdbBR/Noticias1.png" alt="Imagen noticias UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 03, May 2025</div>
+                    <h3 class="card-title">Información para presentar la prueba de homologación Institucional IEP</h3>
+                    <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                    <img src="https://i.postimg.cc/65b0n6Vg/Noticias4.png" alt="Imagen evento UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Jue 02, May 2025</div>
+                    <h3 class="card-title">Visita de Auditor de la Red DHLA-AHK al programa de Administración de Empresas modalidad dual</h3>
+                    <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                    <img src="https://i.postimg.cc/65b0n6Vg/Noticias4.png" alt="Imagen noticia UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Lun 29, Abr 2025</div>
+                    <h3 class="card-title">Cursos intensivos de inglés para estudiantes pregrado profesional de VI semestre aplazado en adelante</h3>
+                    <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                    <img src="https://i.postimg.cc/FFZGFVY9/Noticias2.png" alt="Imagen UNAB" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 26, Abr 2025</div>
+                    <h3 class="card-title">La UNAB conforma Comité del Sistema Integrado de Gestión de Calidad para 2025</h3>
+                    <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                    <img src="https://i.postimg.cc/HnBtSdqJ/Becados-Saber-Pro-01-1-scaled.jpg" alt="Imagen UNAB general" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 26, Abr 2025</div>
+                    <h3 class="card-title">Becas para graduados con mejor desempeño en pruebas nacionales</h3>
+                    <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                    <img src="https://i.postimg.cc/FFZGFVY9/Noticias2.png" alt="Imagen UNAB tecnología" class="card-image">
+                <div class="card-content">
+                    <div class="card-date">Vie 26, Abr 2025</div>
+                    <h3 class="card-title">Actualización Suite Visión Empresarial - Software de Gestión Estratégica</h3>
+                    <a href="#" class="card-link">Ver más</a>
+                </div>
+            </div>
+
+            <button class="view-more-button">Cargar más noticias</button>
+
+
+        </div>
+    </div>
+
+    <script>
+    </script>
+
+</body>
+</html>
