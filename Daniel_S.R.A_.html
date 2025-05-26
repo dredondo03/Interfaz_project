@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Recursos de Aprendizaje</title>
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark-mode {
+            --primary-green: #aaff44;
+            --dark-green: #1a3a0e;
+            --unab-blue: #001a33;
+            --text-color-dark: #e0e0e0;
+            --text-color-light: #333;
+            --background-light: #121212;
+            --surface-card: #1e1e1e;
+            --border-color: #333;
+            --shadow-subtle: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--border-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--text-color-light);
+            height: 100px;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        header .logo-container img {
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.2;
+        }
+
+        header .logo-text span {
+            font-size: 16px;
+            font-weight: normal;
+            color: var(--primary-green);
+        }
+
+        header .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color-light);
+        }
+
+        .subtitulo {
+            background-color: var(--surface-card);
+            padding: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-green);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .buscador {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .buscador input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px 0 0 5px;
+            background-color: var(--surface-card);
+            color: var(--text-color-dark);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .buscador button {
+            padding: 10px;
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            border: 1px solid var(--primary-green);
+            border-left: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .buscador button:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+            background-color: var(--border-color);
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .card {
+            background-color: var(--surface-card);
+            color: var(--text-color-dark);
+            width: 280px;
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 20px;
+            box-shadow: 0 4px 12px var(--shadow-subtle);
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--dark-green);
+            transition: color 0.3s ease;
+        }
+
+        .card p {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: auto;
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            padding: 12px 25px;
+            font-weight: bold;
+            font-size: 17px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .boton:hover {
+            background-color: var(--dark-green);
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            height: 50px;
+            box-shadow: 0 -4px 8px var(--shadow-subtle);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle {
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: var(--dark-green);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Logo UNAB">
+            <div class="logo-text">
+                
+            </div>
+        </div>
+        <div class="main-title">Mi Portal UNAB</div>
+        <button class="dark-mode-toggle" id="darkModeToggle">Modo Oscuro</button>
+    </header>
+
+    <div class="subtitulo">SISTEMA DE RECURSOS DE APRENDIZAJE</div>
+
+    <div class="buscador">
+        <input type="text" placeholder="Buscar recursos...">
+        <button>🔍</button>
+    </div>
+
+    <div class="contenedor">
+        <div class="card">
+            <img src="https://i.postimg.cc/XJt53zYr/Bibli-figma.jpg" alt="Biblioteca UNAB">
+            <h3>Biblioteca UNAB</h3>
+            <p>Biblioteca virtual de la UNAB. Acá puedes encontrar materiales de lecturas para aprender diversos temas.</p>
+            <a href="https://catalogo.unab.edu.co/?_gl=1*tzxy3z*_gcl_aw*R0NMLjE3NDQzMTE1OTIuQ2p3S0NBand0ZGlfQmhBQ0Vpd0E5N3k4QkhsU28yQU5RY3Q5Q1NHVGY4WXZpcGZfbGFoYkVHWXQzcXdGem1yZTBsY1FudGdlYnM5QVlob0NRV2dRQXZEX0J3RQ..*_gcl_au*OTQ2MTE1NTYwLjE3NDQzMTE1ODY.*_ga*MTEwMDM5MDcwNy4xNzQ0MzExNTg2*_ga_LN0FZCTTER*czE3NDc4Njg3MzEkbzYkZzEkdDE3NDc4Njg4MTckajAkbDAkaDA." class="boton" target="_blank">Entrar</a>
+        </div>
+
+        <div class="card">
+            <img src="https://i.postimg.cc/prZPkm4P/factor-10.jpg" alt="Asesorías UNAB">
+            <h3>Asesorías UNAB</h3>
+            <p>Acompañamientos virtuales a través de Asesoría académica. Lunes a viernes 07:00 am a 09:00 pm</p>
+            <a href="https://meet.google.com/ezm-drej-pcq?authuser=3" class="boton" target="_blank">Entrar</a>
+        </div>
+
+        <div class="card">
+            <img src="https://i.postimg.cc/kMFM7H4L/base-de-datos.jpg" alt="Base de datos">
+            <h3>Base de datos académicas</h3>
+            <p>Colecciones de contenido académico como artículos de revistas, libros y más.</p>
+            <a href="https://repository.unab.edu.co/?_gl=1*17avv0h*_gcl_aw*R0NMLjE3NDQzMTE1OTIuQ2p3S0NBand0ZGlfQmhBQ0Vpd0E5N3k4QkhsU28yQU5RY3Q5Q1NHVGY4WXZpcGZfbGFoYkVHWXQzcXdGem1yZTBsY1FudGdlYnM5QVlob0NRV2dRQXZEX0J3RQ..*_gcl_au*OTQ2MTE1NTYwLjE3NDQzMTE1ODY.*_ga*MTEwMDM5MDcwNy4xNzQ0MzExNTg2*_ga_LN0FZCTTER*czE3NDc5NzM2MzYkbzckZzAkdDE3NDc5NzM2MzYkajAkbDAkaDA." class="boton" target="_blank">Entrar</a>
+        </div>
+    </div>
+
+    <footer></footer>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.textContent = 'Modo Claro';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeToggle.textContent = 'Modo Oscuro';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Modo Claro';
+        }
+    </script>
+
+</body>
+</html>
