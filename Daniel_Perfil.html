@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información General UNAB</title>
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark-mode {
+            --primary-green: #aaff44;
+            --dark-green: #1a3a0e;
+            --unab-blue: #001a33;
+            --text-color-dark: #e0e0e0;
+            --text-color-light: #333;
+            --background-light: #121212;
+            --surface-card: #1e1e1e;
+            --border-color: #333;
+            --shadow-subtle: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--border-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--text-color-light);
+            height: 100px;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        header .logo-container img {
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.2;
+        }
+
+        header .logo-text span {
+            font-size: 16px;
+            font-weight: normal;
+            color: var(--primary-green);
+        }
+
+        header .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color-light);
+        }
+
+        .subtitulo {
+            background-color: var(--surface-card);
+            padding: 10px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-green);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+            background-color: var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .card {
+            background-color: var(--surface-card);
+            border-radius: 20px;
+            padding: 20px;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--surface-card);
+            border-radius: 20px;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            color: var(--text-color-dark);
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .graduacion {
+            background-color: var(--surface-card);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .graduacion .section-title {
+            font-size: 18px;
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            height: 40px;
+            box-shadow: 0 -4px 8px var(--shadow-subtle);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle {
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: var(--dark-green);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Logo UNAB">
+            <div class="logo-text">
+                
+            </div>
+        </div>
+        <div class="main-title">Mi Portal UNAB</div>
+        <button class="dark-mode-toggle" id="darkModeToggle">Modo Oscuro</button>
+    </header>
+
+    <div class="subtitulo">Información General.</div>
+
+    <div class="container">
+
+        <div class="profile">
+            <img src="https://i.postimg.cc/155D12P3/user.png" alt="Avatar">
+            <div>Nombre del Usuario</div>
+            <div>Apellido de Usuario</div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Información Personal</div>
+            <table>
+                <tr><td>Correo Electrónico</td><td>usuario@unab.edu.co</td></tr>
+                <tr><td>Teléfono</td><td>3100504002</td></tr>
+                <tr><td>Fecha de nacimiento</td><td>Dia/Mes/Año</td></tr>
+                <tr><td>Ciudadanía</td><td>Colombiano</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="section-title">Curriculum</div>
+            <table>
+                <tr><td>Grado</td><td>Carrera</td></tr>
+                <tr><td>Nivel</td><td>Pregrado profesional</td></tr>
+                <tr><td>Programa</td><td>Programa de carrera</td></tr>
+                <tr><td>Escuela</td><td>Facultad de la carrera</td></tr>
+                <tr><td>Tipo de admisión</td><td>Primer ingreso</td></tr>
+                <tr><td>Periodo de admisión</td><td>20XX-2do SEM PREGRAD Y PREUN</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <table>
+                <tr><td>Nivel</td><td>Pregrado profesional</td></tr>
+                <tr><td>Clase</td><td>X semestre</td></tr>
+                <tr><td>Residencia</td><td>Residente en el País</td></tr>
+                <tr><td>Campus</td><td>El Jardín UNAB</td></tr>
+                <tr><td>Primer periodo que asistió</td><td>20XX-2do SEM PREGRAD Y PREUN</td></tr>
+                <tr><td>Último periodo que asistió</td><td>Dia/Mes/Año</td></tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="graduacion">
+        <div class="section-title">Información de Graduación</div>
+    </div>
+
+    <footer></footer>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.textContent = 'Modo Claro';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeToggle.textContent = 'Modo Oscuro';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Modo Claro';
+        }
+    </script>
+
+</body>
+</html>
