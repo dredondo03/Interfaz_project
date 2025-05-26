@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Estudio</title>
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+
+            --fondo-oscuro: #1a1a1a;
+            --texto-oscuro: #f0f0f0;
+            --cuadro-oscuro: #2a2a2a;
+            --hover-oscuro-card: #3a3a3a;
+        }
+
+        body.oscuro {
+            background: var(--fondo-oscuro);
+            color: var(--texto-oscuro);
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background: var(--background-light);
+            color: var(--text-color-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+            position: relative;
+            z-index: 1;
+        }
+
+        .left-header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .left-header-content .faculty-logo {
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        .left-header-content .portal-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color-light);
+        }
+
+        #botonOscuro {
+            background: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.oscuro #botonOscuro {
+            background: var(--unab-blue);
+            color: var(--text-color-light);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            gap: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--dark-green);
+            margin-bottom: 20px;
+        }
+
+        body.oscuro h2 {
+            color: var(--primary-green);
+        }
+
+        .calendario {
+            display: grid;
+            grid-template-columns: repeat(7, 60px);
+            gap: 10px;
+            background: transparent;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow-subtle);
+        }
+
+        .dia, .label {
+            padding: 15px 0;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s ease, background 0.3s;
+            background: var(--surface-card);
+            border: none;
+            text-align: center;
+            box-shadow: 0 2px 6px var(--shadow-subtle);
+        }
+
+        .dia:hover {
+            background: var(--primary-green);
+            color: var(--text-color-light);
+            transform: scale(1.05);
+        }
+
+        .label {
+            background: var(--dark-green);
+            color: var(--text-color-light);
+            cursor: default;
+        }
+
+        body.oscuro .label {
+            background: var(--unab-blue);
+            color: var(--text-color-light);
+        }
+
+        body.oscuro .dia, body.oscuro .label {
+            background: var(--cuadro-oscuro);
+            box-shadow: 0 2px 6px rgba(255,255,255,0.05);
+        }
+
+        body.oscuro .dia:hover {
+            background: var(--hover-oscuro-card);
+            transform: scale(1.05);
+        }
+
+        #alerta {
+            margin-top: 30px;
+            background: var(--surface-card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px var(--shadow-subtle);
+            width: 320px;
+            font-size: 14px;
+            line-height: 1.5;
+            transition: background 0.3s;
+            color: var(--text-color-dark);
+        }
+
+        body.oscuro #alerta {
+            background: var(--cuadro-oscuro);
+            box-shadow: 0 0 12px rgba(255,255,255,0.1);
+            color: var(--texto-oscuro);
+        }
+
+        footer {
+            background: var(--dark-green);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color-light);
+            font-weight: bold;
+            box-shadow: 0 -4px 8px var(--shadow-subtle);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left-header-content">
+            <img class="faculty-logo" src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Facultad de Ingeniería UNAB">
+            <span class="portal-title">Mi Portal UNAB</span>
+        </div>
+        <button id="botonOscuro" onclick="toggleModoOscuro()">Modo oscuro</button>
+    </header>
+
+    <main>
+        <h2>CALENDARIO DE ESTUDIO</h2>
+
+        <div class="calendario">
+            <div class="label">Lun</div><div class="label">Mar</div><div class="label">Mie</div>
+            <div class="label">Jue</div><div class="label">Vie</div><div class="label">Sab</div><div class="label">Dom</div>
+
+            <div class="dia" onclick="mostrarInfo(1)">1</div>
+            <div class="dia" onclick="mostrarInfo(2)">2</div>
+            <div class="dia" onclick="mostrarInfo(3)">3</div>
+            <div class="dia" onclick="mostrarInfo(4)">4</div>
+            <div class="dia" onclick="mostrarInfo(5)">5</div>
+            <div class="dia" onclick="mostrarInfo(6)">6</div>
+            <div class="dia" onclick="mostrarInfo(7)">7</div>
+            <div class="dia" onclick="mostrarInfo(8)">8</div>
+            <div class="dia" onclick="mostrarInfo(9)">9</div>
+            <div class="dia" onclick="mostrarInfo(10)">10</div>
+            <div class="dia" onclick="mostrarInfo(11)">11</div>
+            <div class="dia" onclick="mostrarInfo(12)">12</div>
+            <div class="dia" onclick="mostrarInfo(13)">13</div>
+            <div class="dia" onclick="mostrarInfo(14)">14</div>
+            <div class="dia" onclick="mostrarInfo(15)">15</div>
+            <div class="dia" onclick="mostrarInfo(16)">16</div>
+            <div class="dia" onclick="mostrarInfo(17)">17</div>
+            <div class="dia" onclick="mostrarInfo(18)">18</div>
+            <div class="dia" onclick="mostrarInfo(19)">19</div>
+            <div class="dia" onclick="mostrarInfo(20)">20</div>
+            <div class="dia" onclick="mostrarInfo(21)">21</div>
+            <div class="dia" onclick="mostrarInfo(22)">22</div>
+            <div class="dia" onclick="mostrarInfo(23)">23</div>
+            <div class="dia" onclick="mostrarInfo(24)">24</div>
+            <div class="dia" onclick="mostrarInfo(25)">25</div>
+            <div class="dia" onclick="mostrarInfo(26)">26</div>
+            <div class="dia" onclick="mostrarInfo(27)">27</div>
+            <div class="dia" onclick="mostrarInfo(28)">28</div>
+            <div class="dia" onclick="mostrarInfo(29)">29</div>
+            <div class="dia" onclick="mostrarInfo(30)">30</div>
+        </div>
+
+        <div id="alerta">Selecciona un día para ver su información.</div>
+    </main>
+
+    <footer>
+        Universidad Autónoma de Bucaramanga
+    </footer>
+
+    <script>
+        function mostrarInfo(dia) {
+            const alerta = document.getElementById("alerta");
+            if (dia === 3) {
+                alerta.innerHTML = `
+                    <strong>Alerta: Miércoles 3 de Marzo de 2025</strong><br><br>
+                    <strong>Actividad #1:</strong><br>
+                    El día <em>Mie/03/2025</em>, la materia <b>Matemáticas I</b> tendrá un parcial sobre:<br>
+                    - Derivadas<br>
+                    - Ley de la cadena<br>
+                    - Derivadas trigonométricas
+                `;
+            } else if (dia === 14) {
+                alerta.innerHTML = `
+                    <strong>Alerta: Domingo 14 de Marzo de 2025</strong><br><br>
+                    <strong>Actividad #3:</strong><br>
+                    El día <em>Dom/14/2025</em>, la materia <b>Física I</b> se hará entrega de la tarea sobre:<br>
+                    - Mecánica Newtoniana<br>
+                    - Inercia<br>
+                    - Equilibrio estático
+                `;
+            } else {
+                alerta.textContent = `No se tiene que hacer nada el día ${dia}.`;
+            }
+        }
+
+        function toggleModoOscuro() {
+            document.body.classList.toggle("oscuro");
+        }
+    </script>
+
+</body>
+</html>
