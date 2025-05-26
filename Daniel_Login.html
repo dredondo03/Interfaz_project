@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNAB - Login</title>
+
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --background-light: #f0f2f5;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --card-background: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-overlay: rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode {
+            --primary-color: #4CAF50;
+            --secondary-color: #388E3C;
+            --background-light: #121212;
+            --text-color-dark: #e0e0e0;
+            --text-color-light: #333;
+            --card-background: #1e1e1e;
+            --shadow-color: rgba(255, 255, 255, 0.1);
+            --shadow-overlay: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .contenedor_1 {
+            display: flex;
+            height: 100vh;
+        }
+
+        .left-section {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .left-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .Parte_derecha {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: var(--background-light);
+            transition: background-color 0.3s ease;
+        }
+
+        .scroll {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 200px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.08);
+        }
+
+        .Login_Carrusel {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .login-carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-item img:hover {
+            transform: scale(1.02);
+        }
+
+        .fixed-login-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px var(--shadow-overlay);
+            width: 70%;
+            max-width: 300px;
+            z-index: 10;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .fixed-login-overlay {
+            background-color: rgba(30, 30, 30, 0.9);
+        }
+
+        .fixed-login-overlay h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-color-dark);
+            transition: transform 0.3s ease, color 0.3s ease;
+            font-size: 1.3em;
+        }
+
+        .fixed-login-overlay h2:hover {
+            transform: scale(1.02);
+        }
+
+        .fixed-login-overlay input[type="text"],
+        .fixed-login-overlay input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9em;
+            background-color: var(--card-background);
+            color: var(--text-color-dark);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .fixed-login-overlay button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+        }
+
+        .fixed-login-overlay button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.02);
+        }
+
+        .fixed-login-overlay .forgot-password {
+            display: block;
+            margin-top: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.8em;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .fixed-login-overlay .forgot-password:hover {
+            text-decoration: underline;
+            transform: scale(1.02);
+        }
+
+        .additional-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            padding-top: 20px;
+        }
+
+        .additional-content .card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .additional-content .card:hover {
+            transform: scale(1.03);
+        }
+
+        .additional-content .card img {
+            max-width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .additional-content .card img:hover {
+            transform: scale(1.02);
+        }
+
+        .additional-content .card h3 {
+            font-size: 1.2em;
+            color: var(--text-color-dark);
+            margin-top: 0;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .additional-content .card h3:hover {
+            transform: scale(1.02);
+        }
+
+        .additional-content .card p {
+            font-size: 0.85em;
+            color: var(--text-color-dark);
+            margin: 0;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .additional-content .card p:hover {
+            transform: scale(1.02);
+        }
+
+        .additional-content .card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            z-index: 100;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-mode-toggle" id="darkModeToggle">Modo Oscuro</button>
+
+    <div class="contenedor_1">
+        <div class="left-section">
+            <img src="https://unab.edu.co/wp-content/uploads/2022/09/UNAB-Jardin.jpg" alt="Campus UNAB">
+        </div>
+        <div class="Parte_derecha">
+            <div class="scroll">
+                <div class="logo">
+                    <img src="https://i.postimg.cc/kgYqJFTK/unn2.png" alt="Logo UNAB">
+                </div>
+
+                <div class="Login_Carrusel">
+                    <div class="login-carousel" id="loginCarousel">
+                        <div class="carousel-item"><img src="https://i.postimg.cc/QMtjQWWh/campuss3.jpg" alt="Imagen Carrusel 1"></div>
+                        <div class="carousel-item"><img src="https://i.postimg.cc/x11whVjP/auditorio.jpg" alt="Imagen Carrusel 2"></div>
+                        <div class="carousel-item"><img src="https://i.postimg.cc/NjGttrDm/est.jpg" alt="Imagen Carrusel 3"></div>
+                    </div>
+                    <div class="fixed-login-overlay">
+                        <h2>Entra A Tu Cuenta</h2>
+                        <form id="loginForm">
+                            <input type="text" id="username" placeholder="Nombre de usuario" required>
+                            <input type="password" id="password" placeholder="Contraseña" required>
+                            <button type="submit">Iniciar Sesión</button>
+                            <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="additional-content">
+                    <div class="card">
+                        <img src="https://i.postimg.cc/J41vHCXW/Estudiantes-en-la-biblioteca.jpg" alt="Experimenta la vida estudiantil">
+                        <h3>Experimenta la vibrante vida estudiantil en la UNAB</h3>
+                        <p>¡Conocenos!</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://i.postimg.cc/nrx516wB/img-unabfest-2025.png" alt="Participa en eventos">
+                        <h3>Participa en emocionantes eventos y actividades</h3>
+                        <p>¡Se Participe!</p>
+                    </div>
+                    <div class="card full-width">
+                        <img src="https://i.postimg.cc/j2tYQTKY/1-Game-lab-1.jpg" alt="Impulsa tu futuro con investigación">
+                        <h3>Impulsa tu Futuro</h3>
+                        <p>¿Te gusta investigar?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginCarousel = document.getElementById('loginCarousel');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            let currentIndex = 0;
+
+            const showNextSlide = () => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            };
+
+            const updateCarousel = () => {
+                const itemWidth = carouselItems[0].clientWidth;
+                loginCarousel.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
+            };
+
+            window.addEventListener('resize', updateCarousel);
+
+            setInterval(showNextSlide, 5000);
+
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const username = loginForm.querySelector('#username').value;
+                    const password = loginForm.querySelector('#password').value;
+
+                    const validUsername = 'Juan1';
+                    const validPassword = '12345';
+
+                    if (username === validUsername && password === validPassword) {
+                        alert('¡Login exitoso! Redirigiendo a la siguiente página.');
+                        window.location.href = 'Pag_prin.html';
+                    } else {
+                        alert('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
+                    }
+                });
+            }
+
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    darkModeToggle.textContent = 'Modo Claro';
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    darkModeToggle.textContent = 'Modo Oscuro';
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+                darkModeToggle.textContent = 'Modo Claro';
+            }
+        });
+    </script>
+</body>
+</html>
