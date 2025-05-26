@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+  <meta charset="UTF-8">
+  <title>Autores de la Página - UNAB</title>
+  <style>
+    /* Definición de variables CSS - ¡Ajustadas a tus colores UNAB! */
+    :root {
+      --primary-green: #84d800; /* Verde principal vibrante */
+      --dark-green: #2c5e1a; /* Verde oscuro UNAB */
+      --unab-blue: #003366; /* Azul institucional UNAB */
+
+      --text-color-light-mode: #333; /* Texto principal en modo claro */
+      --text-color-dark-mode: #f0f0f0; /* Texto principal en modo oscuro */
+      --text-color-inverted: #fff; /* Texto en elementos oscuros, como header y footer */
+
+      --background-body-light: #f8f9fa; /* Fondo general en modo claro (si no hay degradado) */
+      --background-card-light: #fff; /* Fondo de tarjetas/contenedores en modo claro */
+      --border-color-light: #e0e0e0; /* Bordes en modo claro */
+      --shadow-subtle-light: rgba(0, 0, 0, 0.08); /* Sombra en modo claro */
+
+      /* Variables para Modo Oscuro */
+      --background-body-dark: #1a1a1a; /* Fondo general en modo oscuro (si no hay degradado) */
+      --background-card-dark: #2a2a2a; /* Fondo de tarjetas/contenedores en modo oscuro */
+      --border-color-dark: #555; /* Bordes en modo oscuro */
+      --shadow-subtle-dark: rgba(255, 255, 255, 0.1); /* Sombra en modo oscuro */
+      --hover-card-dark: #3a3a3a; /* Hover de tarjetas en modo oscuro */
+
+      /* Variables dinámicas que cambian con el modo */
+      --current-text-color: var(--text-color-light-mode);
+      --current-background-card: var(--background-card-light);
+      --current-border-color: var(--border-color-light);
+      --current-shadow-subtle: var(--shadow-subtle-light);
+    }
+
+    body.oscuro {
+      --current-text-color: var(--text-color-dark-mode);
+      --current-background-card: var(--background-card-dark);
+      --current-border-color: var(--border-color-dark);
+      --current-shadow-subtle: var(--shadow-subtle-dark);
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, var(--dark-green), var(--unab-blue));
+      color: var(--current-text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+    
+    body.oscuro {
+        background: var(--background-body-dark);
+    }
+
+    header {
+      background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+      height: 100px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px var(--current-shadow-subtle);
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .left-header-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .left-header-content .faculty-logo {
+      height: 80px;
+      margin-right: 15px;
+    }
+
+    .left-header-content .portal-title {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--text-color-inverted);
+    }
+
+    #botonOscuro {
+      background: var(--primary-green);
+      color: var(--text-color-inverted);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.oscuro #botonOscuro {
+      background: var(--unab-blue);
+      color: var(--text-color-inverted);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .contenedor {
+      background-color: var(--current-background-card);
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px var(--current-shadow-subtle);
+      max-width: 600px;
+      width: 100%;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      box-sizing: border-box;
+      color: var(--current-text-color);
+    }
+
+    h1 {
+      color: var(--primary-green);
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .autor {
+      background-color: var(--current-background-card);
+      margin: 20px 0;
+      padding: 25px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary-green);
+      /* Alineamos la información a la izquierda y la imagen a la derecha */
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Distribuye espacio entre info y imagen */
+      gap: 15px;
+      box-shadow: 0 2px 8px var(--current-shadow-subtle);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+    }
+
+    body.oscuro .autor:hover {
+      background-color: var(--hover-card-dark);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px var(--current-shadow-subtle);
+    }
+
+    .autor:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      background-color: rgba(132, 216, 0, 0.1);
+    }
+
+    /* La imagen de perfil del autor (izquierda) ha sido eliminada. */
+
+    .autor-info {
+        flex-grow: 1; /* Permite que esta sección ocupe el espacio restante */
+        text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+    }
+
+    .autor h3 {
+      color: var(--primary-green);
+      margin: 0 0 10px 0;
+      font-size: 22px;
+    }
+
+    .autor p {
+      margin: 5px 0;
+      font-size: 16px;
+      color: var(--current-text-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contacto-icon {
+      font-size: 18px;
+      width: 20px;
+      color: var(--dark-green);
+    }
+    body.oscuro .contacto-icon {
+        color: var(--primary-green);
+    }
+
+    /* Estilo para la imagen de sección del autor (derecha) */
+    .autor .author-section-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 2px solid var(--unab-blue);
+        flex-shrink: 0;
+    }
+
+    body.oscuro .autor .author-section-image {
+        border-color: var(--primary-green);
+    }
+
+    footer {
+      background: var(--dark-green);
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color-inverted);
+      font-weight: bold;
+      box-shadow: 0 -4px 8px var(--current-shadow-subtle);
+      width: 100%;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="left-header-content">
+            <img class="faculty-logo" src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Facultad de Ingeniería UNAB">
+            <span class="portal-title">Mi Portal UNAB</span>
+        </div>
+        <button id="botonOscuro" onclick="toggleModoOscuro()">Modo oscuro</button>
+    </header>
+
+    <main>
+        <div class="contenedor">
+            <h1>Autores de la Página</h1>
+            
+            <div class="autor">
+                <div class="autor-info">
+                    <h3>Jesús Urbiñez</h3>
+                    <p><span class="contacto-icon">📧</span> jurbinez</p>
+                    <p><span class="contacto-icon">📱</span> +312 3457878</p>
+                </div>
+                <img class="author-section-image" src="https://i.postimg.cc/d3V3hGt3/Whats-App-Image-2025-05-26-at-4-46-53-PM.jpg" alt="Imagen de sección 1">
+            </div>
+            
+            <div class="autor">
+                <div class="autor-info">
+                    <h3>Daniel Redondo</h3>
+                    <p><span class="contacto-icon">📧</span> dredondo@unab.edu.co</p>
+                    <p><span class="contacto-icon">📱</span> +300 4552653</p>
+                </div>
+                <img class="author-section-image" src="https://i.postimg.cc/W3BjvrFx/Whats-App-Image-2025-05-26-at-5-10-55-PM.jpg" alt="Imagen de sección 2">
+            </div>
+            
+            <div class="autor">
+                <div class="autor-info">
+                    <h3>Pablo Martínez</h3>
+                    <p><span class="contacto-icon">📧</span> posorio520@unab.edu.co</p>
+                    <p><span class="contacto-icon">📱</span> +318 4329874</p>
+                </div>
+                <img class="author-section-image" src="https://i.postimg.cc/VNHmK2Yf/Whats-App-Image-2025-05-26-at-5-08-39-PM.jpg" alt="Imagen de sección 3">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Universidad Autónoma de Bucaramanga
+    </footer>
+
+    <script>
+        function toggleModoOscuro() {
+            document.body.classList.toggle("oscuro");
+            if (document.body.classList.contains("oscuro")) {
+                localStorage.setItem("modoOscuro", "true");
+            } else {
+                localStorage.removeItem("modoOscuro");
+            }
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem("modoOscuro") === "true") {
+                document.body.classList.add("oscuro");
+            }
+        };
+    </script>
+</body>
+</html>
