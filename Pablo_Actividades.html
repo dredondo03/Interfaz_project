@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades Extracurriculares</title>
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+
+            --fondo-oscuro: #1a1a1a;
+            --texto-oscuro: #f0f0f0;
+            --cuadro-oscuro: #2a2a2a;
+            --hover-oscuro: #3a3a3a;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background: var(--background-light);
+            color: var(--text-color-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.oscuro {
+            background: var(--fondo-oscuro);
+            color: var(--texto-oscuro);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+        }
+
+        header .left-section {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo-group {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        header .logo-group img {
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        header .logo-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.2;
+        }
+
+        header .logo-text-container span {
+            font-size: 16px;
+            font-weight: normal;
+            color: var(--primary-green);
+        }
+
+        header .main-portal-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color-light);
+        }
+
+        #botonOscuro {
+            background: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.oscuro #botonOscuro {
+            background: var(--unab-blue);
+            color: var(--text-color-light);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--dark-green);
+            margin-bottom: 30px;
+        }
+
+        .eventos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .evento {
+            background: var(--surface-card);
+            width: 90%;
+            max-width: 600px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px var(--shadow-subtle);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.3s;
+            color: var(--text-color-dark);
+        }
+
+        body.oscuro .evento {
+            background: var(--cuadro-oscuro);
+            box-shadow: 0 0 5px rgba(255,255,255,0.15);
+            color: var(--texto-oscuro);
+        }
+
+        .evento:hover {
+            background: var(--primary-green);
+            color: var(--text-color-light);
+        }
+
+        body.oscuro .evento:hover {
+            background: var(--hover-oscuro);
+        }
+
+        .evento img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+        }
+
+        body.oscuro .evento img {
+            border: 2px solid #555;
+        }
+
+        #info {
+            background: var(--surface-card);
+            margin: 0 auto;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 6px var(--shadow-subtle);
+            max-width: 600px;
+            transition: background 0.3s;
+            color: var(--text-color-dark);
+        }
+
+        body.oscuro #info {
+            background: var(--cuadro-oscuro);
+            box-shadow: 0 0 6px rgba(255,255,255,0.1);
+            color: var(--texto-oscuro);
+        }
+
+        .mas {
+            font-size: 40px;
+            margin-top: 20px;
+            cursor: pointer;
+            color: var(--dark-green);
+        }
+
+        body.oscuro .mas {
+            color: var(--primary-green);
+        }
+
+        form {
+            display: none;
+            flex-direction: column;
+            background: var(--surface-card);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 6px var(--shadow-subtle);
+            max-width: 500px;
+            margin: 20px auto;
+            transition: background 0.3s;
+            color: var(--text-color-dark);
+        }
+
+        body.oscuro form {
+            background: var(--cuadro-oscuro);
+            box-shadow: 0 0 6px rgba(255,255,255,0.1);
+            color: var(--texto-oscuro);
+        }
+
+        form input, form textarea {
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+            background: var(--background-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color-dark);
+        }
+
+        body.oscuro form input,
+        body.oscuro form textarea {
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+        }
+
+        form button {
+            padding: 10px;
+            background: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        form button:hover {
+            background: var(--dark-green);
+        }
+
+        footer {
+            background: var(--dark-green);
+            height: 50px;
+            box-shadow: 0 -4px 8px var(--shadow-subtle);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left-section"> <div class="logo-group">
+            <img src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Logo UNAB">
+            <div class="logo-text-container">
+            </div>
+        </div>
+        <div class="main-portal-title">Mi Portal UNAB</div>
+        </div>
+        <button id="botonOscuro" onclick="toggleModoOscuro()">Modo Oscuro</button>
+    </header>
+
+    <main>
+        <h2>ACTIVIDADES EXTRACURRICULARES</h2>
+
+        <div class="eventos">
+            <div class="evento" onclick="mostrarInfo(1)">
+                <img src="https://i.postimg.cc/d3DP8pjr/Expresarte-5.jpg" alt="Imagen evento 1">
+                <div>
+                    <strong>Evento #1:</strong> Expresarte
+                </div>
+            </div>
+
+            <div class="evento" onclick="mostrarInfo(2)">
+                <img src="https://i.postimg.cc/nrx516wB/img-unabfest-2025.png" alt="Imagen evento 2">
+                <div>
+                    <strong>Evento #2:</strong> Unab Fest
+                </div>
+            </div>
+        </div>
+
+        <div id="info">Haz clic en un evento para ver la información.</div>
+
+        <div class="mas" onclick="document.getElementById('formulario').style.display = 'flex';">
+            ➕
+        </div>
+
+        <form id="formulario" onsubmit="enviarCorreo(event)">
+            <h3>Agregar nuevo evento</h3>
+            <input type="text" placeholder="Nombre del evento" required>
+            <textarea placeholder="Descripción del evento" required></textarea>
+            <input type="text" placeholder="Fecha y horario" required>
+            <input type="email" placeholder="Tu correo" required>
+            <button type="submit">Enviar</button>
+        </form>
+    </main>
+
+    <footer></footer>
+
+    <script>
+        function mostrarInfo(id) {
+            const info = document.getElementById('info');
+            if (id === 1) {
+                info.innerHTML = `
+                    <strong>Evento #1: Expresarte</strong><br><br>
+                    Información general del evento. El programa de Licenciatura en Educación Infantil de la Universidad Autónoma de Bucaramanga (UNAB)<br>
+                    presentará ExpresArte, la primera feria de arte y cultura.<br><br>
+                    Fecha y horario: 15 de mayo, 2:00 p.m.<br>
+                    Contacto: actividades@unab.edu.co<br>
+                    Requisitos: inscripción previa.
+                `;
+            } else if (id === 2) {
+                info.innerHTML = `
+                    <strong>Evento #2: Unab Fest</strong><br><br>
+                    Información general: UNAB Fest es un festival académico y cultural de la Universidad Autónoma de Bucaramanga (UNAB)<br>
+                    que busca generar encuentros de integración entre todos los miembros de la comunidad universitaria.<br><br>
+                    Fecha y horario: 20 de mayo, 10:00 a.m.<br>
+                    Contacto: eventos@unab.edu.co<br>
+                    Requisitos: entrada libre.
+                `;
+            }
+        }
+
+        function enviarCorreo(e) {
+            e.preventDefault();
+            alert('Formulario enviado a: eventos@unab.edu.co');
+            document.getElementById('formulario').reset();
+            document.getElementById('formulario').style.display = 'none';
+        }
+
+        function toggleModoOscuro() {
+            document.body.classList.toggle("oscuro");
+            if (document.body.classList.contains("oscuro")) {
+                localStorage.setItem("modoOscuro", "true");
+            } else {
+                localStorage.removeItem("modoOscuro");
+            }
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem("modoOscuro") === "true") {
+                document.body.classList.add("oscuro");
+            }
+        };
+    </script>
+
+</body>
+</html>
