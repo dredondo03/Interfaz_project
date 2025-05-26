@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resumen de Calificaciones - UNAB</title>
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+
+            --fondo-oscuro: #1a1a1a;
+            --texto-oscuro: #f0f0f0;
+            --cuadro-oscuro: #2a2a2a;
+            --hover-oscuro: #3a3a3a;
+        }
+
+        body.dark {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #f0f0f0;
+            --text-color-light: #fff;
+            --background-light: #121212;
+            --surface-card: #1e1e1e;
+            --border-color: #555;
+            --shadow-subtle: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background-light);
+            color: var(--text-color-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: flex-start;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+            position: relative;
+            z-index: 1;
+        }
+
+        .left-header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .left-header-content .faculty-logo {
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        .left-header-content .portal-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color-light);
+            margin-right: auto;
+        }
+
+        .tema {
+            display: block;
+            margin: 10px auto 20px auto;
+            padding: 10px 25px;
+            font-size: 16px;
+            background: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            max-width: 200px;
+            text-align: center;
+        }
+
+        .tema:hover {
+            background: var(--dark-green);
+        }
+
+        body.dark .tema {
+            background: var(--unab-blue);
+        }
+
+        body.dark .tema:hover {
+            background: #002244;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 30px 30px 30px;
+        }
+
+        h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark-green);
+        }
+
+        body.dark h1 {
+            color: var(--primary-green);
+        }
+
+        .selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        select {
+            font-size: 16px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--surface-card);
+            color: var(--text-color-dark);
+        }
+
+        body.dark select {
+            background: var(--cuadro-oscuro);
+            color: var(--texto-oscuro);
+            border: 1px solid #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px var(--shadow-subtle);
+        }
+
+        body.dark table {
+            background: var(--cuadro-oscuro);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color-dark);
+        }
+
+        body.dark th,
+        body.dark td {
+            color: var(--texto-oscuro);
+        }
+
+        th {
+            background: var(--primary-green);
+            color: var(--text-color-light);
+        }
+
+        body.dark th {
+            background: var(--dark-green);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        button {
+            display: block;
+            margin: 25px auto 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: var(--dark-green);
+        }
+
+        footer {
+            background: var(--dark-green);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color-light);
+            font-weight: bold;
+            box-shadow: 0 -4px 8px var(--shadow-subtle);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left-header-content">
+            <img class="faculty-logo" src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Facultad de Ingeniería UNAB" />
+            <span class="portal-title">Mi Portal UNAB</span>
+        </div>
+    </header>
+
+    <button class="tema" onclick="toggleModoOscuro()">🌙 Modo Oscuro</button>
+
+    <main>
+        <h1>Resumen de Calificaciones</h1>
+
+        <div class="selector">
+            <select id="semestre">
+                <option value="1">Semestre 1</option>
+                <option value="2">Semestre 2</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Curso</th>
+                    <th>Parcial</th>
+                    <th>Final</th>
+                    <th>Créditos</th>
+                </tr>
+            </thead>
+            <tbody id="contenido"></tbody>
+        </table>
+
+        <button onclick="mostrarResumen()">Mostrar promedio</button>
+        <p id="resumen"></p>
+    </main>
+
+    <footer>
+        Universidad Autónoma de Bucaramanga
+    </footer>
+
+    <script>
+        const datos = {
+            1: [
+                { materia: "Matemáticas I", curso: "101", parcial: 3.5, final: 4.0, creditos: 3 },
+                { materia: "Física I", curso: "102", parcial: 3.0, final: 3.7, creditos: 3 },
+            ],
+            2: [
+                { materia: "Matemáticas II", curso: "201", parcial: 2.8, final: 3.3, creditos: 3 },
+                { materia: "Física II", curso: "202", parcial: 2.5, final: 2.9, creditos: 3 },
+            ],
+        };
+
+        const select = document.getElementById("semestre");
+        const contenido = document.getElementById("contenido");
+        const resumen = document.getElementById("resumen");
+
+        function cargarTabla() {
+            const semestre = select.value;
+            contenido.innerHTML = datos[semestre]
+                .map(
+                    (c) => `
+                    <tr>
+                        <td>${c.materia}</td>
+                        <td>${c.curso}</td>
+                        <td>${c.parcial}</td>
+                        <td>${c.final}</td>
+                        <td>${c.creditos}</td>
+                    </tr>`
+                )
+                .join("");
+        }
+
+        function mostrarResumen() {
+            const semestre = select.value;
+            const promedio =
+                datos[semestre].reduce((s, c) => s + c.final, 0) / datos[semestre].length;
+            resumen.textContent = `Promedio final del semestre ${semestre}: ${promedio.toFixed(
+                2
+            )}`;
+        }
+
+        function toggleModoOscuro() {
+            document.body.classList.toggle("dark");
+        }
+
+        select.addEventListener("change", cargarTabla);
+        cargarTabla();
+    </script>
+</body>
+</html>
