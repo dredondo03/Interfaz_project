@@ -1,81 +1,185 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contactos UNAB</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #84d800;
-      margin: 0;
-      padding: 0;
-    }
+    <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mi Portal UNAB</title>
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+        }
 
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 30px;
-    }
+        body.dark-mode {
+            --primary-green: #aaff44;
+            --dark-green: #1a3a0e;
+            --unab-blue: #001a33;
+            --text-color-dark: #e0e0e0;
+            --text-color-light: #333;
+            --background-light: #121212;
+            --surface-card: #1e1e1e;
+            --border-color: #333;
+            --shadow-subtle: rgba(255, 255, 255, 0.08);
+        }
 
-    h2 {
-      text-align: left;
-      color: #333333;
-      margin-bottom: 20px;
-    }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--border-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-    .contacto {
-      border-top: 1px solid #ddd;
-      padding: 15px 0;
-    }
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--text-color-light);
+            height: 100px;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+        }
 
-    .contacto:first-child {
-      border-top: none;
-    }
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
 
-    .titulo {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+        header .logo-container img {
+            height: 80px;
+            margin-right: 10px;
+        }
 
-    .telefono, .correo {
-      color: #555;
-    }
+        header .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color-light);
+        }
 
-  </style>
+        .dark-mode-toggle {
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: var(--dark-green);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: var(--surface-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow-subtle);
+            padding: 30px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h2 {
+            text-align: left;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .contacto {
+            border-top: 1px solid var(--border-color);
+            padding: 15px 0;
+            color: var(--text-color-dark);
+        }
+
+        .contacto:first-child {
+            border-top: none;
+        }
+
+        .titulo {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-color-dark);
+        }
+
+        .telefono, .correo {
+            color: var(--text-color-dark);
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            height: 40px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 8px var(--shadow-subtle);
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>Contactos</h2>
+    <header>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Logo UNAB">
+        </div>
+        <div class="main-title">Mi Portal UNAB</div>
+        <button class="dark-mode-toggle" id="darkModeToggle">Modo Oscuro</button>
+    </header>
 
-    <div class="contacto">
-      <div class="titulo">Admisiones</div>
-      <div class="telefono">310 123 4567</div>
-      <div class="correo">admision@unab.edu</div>
+    <div class="container">
+        <h2>Contactos</h2>
+        <div class="contacto">
+            <div class="titulo">Admisiones</div>
+            <div class="telefono">310 123 4567</div>
+            <div class="correo">admision@unab.edu</div>
+        </div>
+        <div class="contacto">
+            <div class="titulo">Soporte técnico</div>
+            <div class="telefono">310 987 6543</div>
+            <div class="correo">soporte@unab.edu</div>
+        </div>
+        <div class="contacto">
+            <div class="titulo">Registro Académico</div>
+            <div class="telefono">310 555 0123</div>
+            <div class="correo">registro@unab.edu</div>
+        </div>
+        <div class="contacto">
+            <div class="titulo">Internacionalización</div>
+            <div class="telefono">310 555 6789</div>
+            <div class="correo">internacional@unab.edu</div>
+        </div>
     </div>
 
-    <div class="contacto">
-      <div class="titulo">Soporte técnico</div>
-      <div class="telefono">310 987 6543</div>
-      <div class="correo">soporte@unab.edu</div>
-    </div>
+    <footer></footer>
 
-    <div class="contacto">
-      <div class="titulo">Registro Académico</div>
-      <div class="telefono">310 555 0123</div>
-      <div class="correo">registro@unab.edu</div>
-    </div>
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
 
-    <div class="contacto">
-      <div class="titulo">Internacionalización</div>
-      <div class="telefono">310 555 6789</div>
-      <div class="correo">internacional@unab.edu</div>
-    </div>
-  </div>
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.textContent = 'Modo Claro';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeToggle.textContent = 'Modo Oscuro';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Modo Claro';
+        }
+    </script>
 
 </body>
 </html>
