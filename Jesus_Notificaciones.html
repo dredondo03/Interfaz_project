@@ -2,111 +2,230 @@
 <html lang="es">
 <head>
     <link rel="icon" type="image/png" href="https://unab.edu.co/wp-content/uploads/2022/09/cropped-favicon-naranja-32x32.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Notificaciones - UNAB</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #d6f5d6;
-      background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Logo_UNAB.png/800px-Logo_UNAB.png');
-      background-repeat: no-repeat;
-      background-position: center 50px;
-      background-size: 120px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portal UNAB</title>
+    <style>
+        :root {
+            --primary-green: #84d800;
+            --dark-green: #2c5e1a;
+            --unab-blue: #003366;
+            --text-color-dark: #333;
+            --text-color-light: #fff;
+            --background-light: #f8f9fa;
+            --surface-card: #fff;
+            --border-color: #e0e0e0;
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+        }
 
-    .container {
-      max-width: 700px;
-      margin: 200px auto 50px auto;
-      background-color: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
+        body.dark-mode {
+            --primary-green: #aaff44;
+            --dark-green: #1a3a0e;
+            --unab-blue: #001a33;
+            --text-color-dark: #e0e0e0;
+            --text-color-light: #333;
+            --background-light: #121212;
+            --surface-card: #1e1e1e;
+            --border-color: #333;
+            --shadow-subtle: rgba(255, 255, 255, 0.08);
+        }
 
-    h2 {
-      margin-bottom: 25px;
-      color: #333;
-    }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--border-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-    .notificacion {
-      display: flex;
-      align-items: flex-start;
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--unab-blue));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--text-color-light);
+            height: 100px;
+            box-shadow: 0 4px 8px var(--shadow-subtle);
+        }
 
-    .icono {
-      background-color: #4CAF50;
-      color: white;
-      font-size: 24px;
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 15px;
-    }
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
 
-    .contenido {
-      flex: 1;
-    }
+        header .logo-container img {
+            height: 80px;
+            margin-right: 10px;
+        }
 
-    .titulo {
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
+        header .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color-light);
+        }
 
-    .descripcion {
-      color: #555;
-      margin-bottom: 4px;
-    }
+        .dark-mode-toggle {
+            background-color: var(--primary-green);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-left: auto;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-    .fecha {
-      font-size: 14px;
-      color: #888;
-    }
-  </style>
+        .dark-mode-toggle:hover {
+            background-color: var(--dark-green);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 20px;
+            background-color: var(--border-color);
+        }
+
+        .notificaciones {
+            max-width: 700px;
+            margin: auto;
+            background-color: var(--surface-card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 20px var(--shadow-subtle);
+        }
+
+        .notificaciones h2 {
+            margin-bottom: 25px;
+            color: var(--primary-green);
+            font-size: 24px;
+        }
+
+        .notificacion {
+            display: flex;
+            align-items: flex-start;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode .notificacion {
+            background-color: #2a2a2a;
+            border-color: var(--border-color);
+        }
+
+        .icono {
+            background-color: var(--primary-green);
+            color: white;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .contenido {
+            flex: 1;
+        }
+
+        .titulo {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .descripcion {
+            color: var(--text-color-dark);
+            margin-bottom: 4px;
+        }
+
+        .fecha {
+            font-size: 14px;
+            color: #888;
+        }
+
+        footer {
+            background-color: var(--dark-green);
+            height: 40px;
+            box-shadow: 0 -4px 8px var(--shadow-subtle);
+            transition: background-color 0.3s ease;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>Notificaciones</h2>
+    <header>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/pdFq2NF7/Logo-sistemas.png" alt="Logo UNAB">
+        </div>
+        <div class="main-title">Mi Portal UNAB</div>
+        <button class="dark-mode-toggle" id="darkModeToggle">Modo Oscuro</button>
+    </header>
 
-    <div class="notificacion">
-      <div class="icono">📅</div>
-      <div class="contenido">
-        <div class="titulo">Inscripción de asignaturas</div>
-        <div class="descripcion">Ya puedes inscribir tus asignaturas para el semestre</div>
-        <div class="fecha">20 de abril, 2024</div>
-      </div>
+    <div class="container">
+        <div class="notificaciones">
+            <h2>Notificaciones</h2>
+
+            <div class="notificacion">
+                <div class="icono">📅</div>
+                <div class="contenido">
+                    <div class="titulo">Inscripción de asignaturas</div>
+                    <div class="descripcion">Ya puedes inscribir tus asignaturas para el semestre</div>
+                    <div class="fecha">20 de abril, 2024</div>
+                </div>
+            </div>
+
+            <div class="notificacion">
+                <div class="icono">🔊</div>
+                <div class="contenido">
+                    <div class="titulo">Próxima conferencia</div>
+                    <div class="descripcion">La conferencia sobre diseño de algoritmos comenzará pronto</div>
+                    <div class="fecha">20 de abril, 2024</div>
+                </div>
+            </div>
+
+            <div class="notificacion">
+                <div class="icono">📝</div>
+                <div class="contenido">
+                    <div class="titulo">Nueva tarea: Proyecto final</div>
+                    <div class="descripcion">Se ha publicado una nueva tarea del curso de Ingeniería</div>
+                    <div class="fecha">20 de abril, 2024</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="notificacion">
-      <div class="icono">🔊</div>
-      <div class="contenido">
-        <div class="titulo">Próxima conferencia</div>
-        <div class="descripcion">La conferencia sobre diseño de algoritmos comenzará pronto</div>
-        <div class="fecha">20 de abril, 2024</div>
-      </div>
-    </div>
+    <footer></footer>
 
-    <div class="notificacion">
-      <div class="icono">📝</div>
-      <div class="contenido">
-        <div class="titulo">Nueva tarea: Proyecto final</div>
-        <div class="descripcion">Se ha publicado una nueva tarea del curso de Ingeniería</div>
-        <div class="fecha">20 de abril, 2024</div>
-      </div>
-    </div>
-  </div>
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.textContent = 'Modo Claro';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeToggle.textContent = 'Modo Oscuro';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = 'Modo Claro';
+        }
+    </script>
 
 </body>
 </html>
